@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Automation Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>WhatsApp Automation <span>Live</span></h1>
+            <div id="status-badge" class="status offline">Connecting...</div>
+        </header>
+
+        <!-- QR Code Modal (Hidden by default) -->
+        <div id="qr-container" class="qr-container hidden">
+            <h2>Scan to Log In</h2>
+            <p>Scan this QR code with your WhatsApp to authenticate the bot.</p>
+            <div class="qr-code-wrapper" id="qrcode"></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card glass">
+                <h3>Total Leads</h3>
+                <div class="stat-value" id="total-leads">-</div>
+            </div>
+            <div class="stat-card glass">
+                <h3>DMs Sent</h3>
+                <div class="stat-value text-green" id="sent-dms">-</div>
+            </div>
+            <div class="stat-card glass">
+                <h3>Pending DMs</h3>
+                <div class="stat-value text-yellow" id="pending-dms">-</div>
+            </div>
+        </div>
+
+        <div class="split-grid">
+            <div class="glass ab-test-card">
+                <h2>A/B Test Results</h2>
+                <div class="ab-stats">
+                    <div class="ab-stat">
+                        <h4>Variant A</h4>
+                        <p class="subtitle">(AI Phone Only)</p>
+                        <div class="stat-value" id="variant-a">-</div>
+                    </div>
+                    <div class="ab-stat">
+                        <h4>Variant B</h4>
+                        <p class="subtitle">(Combo)</p>
+                        <div class="stat-value" id="variant-b">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass recent-activity">
+                <h2>Recent Activity</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name / Business</th>
+                                <th>Phone</th>
+                                <th>Variant</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activity-table">
+                            <!-- Rows injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
