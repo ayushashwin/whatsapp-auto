@@ -3,10 +3,20 @@ const { google } = require('googleapis');
 // Connect to Google Sheets
 async function getSheetData() {
     try {
-        const auth = new google.auth.GoogleAuth({
-            keyFile: './credentials.json', // The key file from Google Cloud
-            scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
-        });
+        // Use GOOGLE_CREDENTIALS env var on Render, fallback to file for local dev
+        let authConfig;
+        if (process.env.GOOGLE_CREDENTIALS) {
+            authConfig = {
+                credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+                scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+            };
+        } else {
+            authConfig = {
+                keyFile: './credentials.json',
+                scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+            };
+        }
+        const auth = new google.auth.GoogleAuth(authConfig);
 
         const client = await auth.getClient();
         const googleSheets = google.sheets({ version: 'v4', auth: client });
