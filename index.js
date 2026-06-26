@@ -115,12 +115,14 @@ async function startBot() {
     const store = new MongoStore({ mongoose: mongoose });
 
     // 3. Initialize WhatsApp Client
+    const puppeteer = require('puppeteer');
     const client = new Client({
         authStrategy: new RemoteAuth({
             store: store,
             backupSyncIntervalMs: 300000 // Sync session every 5 mins
         }),
         puppeteer: {
+            executablePath: puppeteer.executablePath(),
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox'] // Required for cloud hosting (Render/Railway)
         }
